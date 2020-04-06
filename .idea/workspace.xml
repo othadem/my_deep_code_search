@@ -1,11 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fe84db5b-d377-4665-8f71-6a7108791c76" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/my_deep_code_search.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/my_deep_code_search.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repr_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/repr_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="othadem &lt;othadem@users.noreply.github.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1aB44pPQyVvfGbXGMyStlyLNq22" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fe84db5b-d377-4665-8f71-6a7108791c76" name="Default Changelist" comment="" />
+      <created>1586195464706</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586195464706</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Doing initial commit for code backup">
+      <created>1586195558283</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586195558283</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Doing initial commit for code backup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Doing initial commit for code backup" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="436" y="11" key="CommitChangelistDialog2" timestamp="1586195556971">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="436" y="11" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586195556971" />
+    <state x="361" y="148" key="Vcs.Push.Dialog.v2" timestamp="1586195563498">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586195563498" />
+    <state x="473" y="168" width="1048" height="488" key="find.popup" timestamp="1586196644593">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="473" y="168" width="1048" height="488" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1586196644593" />
   </component>
 </project>

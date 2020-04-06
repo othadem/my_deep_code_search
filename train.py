@@ -276,7 +276,7 @@ def parse_args():
     parser.add_argument('--data_path', type=str, default='./data/', help='location of the data corpus')
     parser.add_argument('--model', type=str, default='JointEmbeder', help='model name')
     parser.add_argument('--dataset', type=str, default='github', help='name of dataset.java, python')
-    parser.add_argument('--reload_from', type=int, default=480, help='epoch to reload from')
+    parser.add_argument('--reload_from', type=int, default=390, help='epoch to reload from')
    
     parser.add_argument('-g', '--gpu_id', type=int, default=0, help='GPU ID')
     parser.add_argument('-v', "--visual",action="store_true", default=False, help="Visualize training status in tensorboard")

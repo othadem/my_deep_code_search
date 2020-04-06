@@ -110,7 +110,7 @@ def parse_args():
     parser.add_argument('--data_path', type=str, default='./data/', help='location of the data corpus')
     parser.add_argument('--model', type=str, default='JointEmbeder', help='model name')
     parser.add_argument('-d', '--dataset', type=str, default='github', help='name of dataset.java, python')
-    parser.add_argument('--reload_from', type=int, default=480, help='step to reload from')
+    parser.add_argument('--reload_from', type=int, default=390, help='step to reload from')
     parser.add_argument('--chunk_size', type=int, default=2000000, help='codebase and code vector are stored in many chunks. '\
                          'Note: should be consistent with the same argument in the repr_code.py')
     parser.add_argument('-g', '--gpu_id', type=int, default=0, help='GPU ID')

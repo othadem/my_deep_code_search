@@ -114,9 +114,9 @@ def save_vecs(vecs, fout):
 if __name__ == '__main__':
     input_dir='./data/github/'
     train_set=CodeSearchDataset(input_dir, 'train.name.h5', 6, 'train.apiseq.h5', 20, 'train.tokens.h5', 30, 'train.desc.h5', 30)
-    train_data_loader=torch.utils.data.DataLoader(dataset=train_set, batch_size=1, shuffle=False, num_workers=1)
+    train_data_loader=torch.utils.data.DataLoader(dataset=train_set, batch_size=128, shuffle=False, num_workers=1)
     use_set=CodeSearchDataset(input_dir, 'use.name.h5', 6, 'use.apiseq.h5', 20, 'use.tokens.h5', 30)
-    use_data_loader=torch.utils.data.DataLoader(dataset=use_set, batch_size=1, shuffle=False, num_workers=1)
+    use_data_loader=torch.utils.data.DataLoader(dataset=use_set, batch_size=128, shuffle=False, num_workers=1)
     vocab_api = load_dict(input_dir+'vocab.apiseq.json')
     vocab_name = load_dict(input_dir+'vocab.name.json')
     vocab_tokens = load_dict(input_dir+'vocab.tokens.json')

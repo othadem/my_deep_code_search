@@ -53,13 +53,16 @@ def load_codevecs(vec_path, chunk_size=2000000):
     return codevecs
 
 def search(config, model, vocab, query, n_results=10):
+    device = torch.device(f"cuda:{args.gpu_id}" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
     model.eval()
-    device = next(model.parameters()).device
-    desc, desc_len =sent2indexes(query, vocab_desc, config['desc_len'])#convert query into word indices
+    # device = next(model.parameters()).device
+    desc, desc_len = sent2indexes(query, vocab_desc, config['desc_len'])#convert query into word indices
     desc = torch.from_numpy(desc).unsqueeze(0).to(device)
     desc_len = torch.from_numpy(desc_len).clamp(max=config['desc_len']).to(device)
     with torch.no_grad():
         desc_repr = model.desc_encoding(desc, desc_len).data.cpu().numpy().astype(np.float32) # [1 x dim]
+        # desc_repr = model.desc_encoding(desc, desc_len)
     if config['sim_measure']=='cos': # normalizing vector for fast cosine computation
         desc_repr = normalize(desc_repr) # [1 x dim]
     results =[]
@@ -73,12 +76,12 @@ def search(config, model, vocab, query, n_results=10):
         t.join()
     return results
 
-def search_thread(results, desc_repr, codevecs, i, n_results, sim_measure):        
+def search_thread(results, desc_repr, codevecs, i, n_results, sim_measures):
 #1. compute code similarities
     if sim_measures=='cos':
         chunk_sims = np.dot(codevecs, desc_repr.T)[:,0] # [pool_size]
     else:
-        chunk_sims = similarity(codevecs, desc_repr, sim_measure) # [pool_size]
+        chunk_sims = similarity(codevecs, desc_repr, sim_measures) # [pool_size]
     
 #2. select the top K results
     negsims = np.negative(chunk_sims)
@@ -140,6 +143,8 @@ if __name__ == '__main__':
     while True:
         try:
             query = input('Input Query: ')
+            if query == "exit" :
+                break
             n_results = int(input('How many results? '))
         except Exception:
             print("Exception while parsing your input:")

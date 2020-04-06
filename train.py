@@ -230,8 +230,7 @@ def validate(valid_set, model, pool_size, K, sim_measure):
     model.eval()
     device = next(model.parameters()).device
 
-    data_loader = torch.utils.data.DataLoader(dataset=valid_set, batch_size=10000, 
-                                 shuffle=True, drop_last=True, num_workers=1)
+    data_loader = torch.utils.data.DataLoader(dataset=valid_set, batch_size=128, shuffle=True, drop_last=True, num_workers=1)
     accs, mrrs, maps, ndcgs=[],[],[],[]
     code_reprs, desc_reprs = [], []
     n_processed = 0
@@ -249,26 +248,39 @@ def validate(valid_set, model, pool_size, K, sim_measure):
         desc_reprs.append(desc_repr)
         n_processed += batch[0].size(0)
     code_reprs, desc_reprs = np.vstack(code_reprs), np.vstack(desc_reprs)
-     
+
+    print("pool_size - ", pool_size)
+    pool_size = 9984
+
     for k in tqdm(range(0, n_processed, pool_size)):
-        code_pool, desc_pool = code_reprs[k:k+pool_size], desc_reprs[k:k+pool_size] 
-        for i in range(min(10000, pool_size)): # for i in range(pool_size):
-            desc_vec = np.expand_dims(desc_pool[i], axis=0) # [1 x dim]
-            n_results = K    
-            if sim_measure=='cos':
-                sims = np.dot(code_pool, desc_vec.T)[:,0] # [pool_size]
-            else:
-                sims = similarity(code_pool, desc_vec, sim_measure) # [pool_size]
-                
-            negsims=np.negative(sims)
-            predict = np.argpartition(negsims, kth=n_results-1)#predict=np.argsort(negsims)#
+        code_pool, desc_pool = code_reprs[k:k+pool_size], desc_reprs[k:k+pool_size]
+        print("code_pool len ", len(code_pool))
+        print("desc_pool len ", len(desc_pool))
+        for i in range(min(10000, pool_size - 1)): # for i in range(pool_size):
+            print("desc_pool ", i)
+            predict = []
+            try :
+                n_results = K
+                desc_vec = np.expand_dims(desc_pool[i], axis=0) # [1 x dim]
+
+                if sim_measure=='cos':
+                    sims = np.dot(code_pool, desc_vec.T)[:,0] # [pool_size]
+                else:
+                    sims = similarity(code_pool, desc_vec, sim_measure) # [pool_size]
+
+                negsims = np.negative(sims)
+                predict = np.argpartition(negsims, kth=n_results-1)#predict=np.argsort(negsims)#
+            except:
+                print("There is an exception in validation")
             predict = predict[:n_results]   
             predict = [int(k) for k in predict]
             real = [i]
             accs.append(ACC(real,predict))
             mrrs.append(MRR(real,predict))
             maps.append(MAP(real,predict))
-            ndcgs.append(NDCG(real,predict))                     
+            ndcgs.append(NDCG(real,predict))
+            print("Validation results ", np.mean(accs))
+
     return {'acc':np.mean(accs), 'mrr': np.mean(mrrs), 'map': np.mean(maps), 'ndcg': np.mean(ndcgs)}   
     
 def parse_args():
@@ -276,14 +288,14 @@ def parse_args():
     parser.add_argument('--data_path', type=str, default='./data/', help='location of the data corpus')
     parser.add_argument('--model', type=str, default='JointEmbeder', help='model name')
     parser.add_argument('--dataset', type=str, default='github', help='name of dataset.java, python')
-    parser.add_argument('--reload_from', type=int, default=390, help='epoch to reload from')
+    parser.add_argument('--reload_from', type=int, default=-1, help='epoch to reload from')
    
     parser.add_argument('-g', '--gpu_id', type=int, default=0, help='GPU ID')
     parser.add_argument('-v', "--visual",action="store_true", default=False, help="Visualize training status in tensorboard")
     parser.add_argument('--automl', action='store_true', default=False, help='use automl')
     # Training Arguments
     parser.add_argument('--log_every', type=int, default=10, help='interval to log autoencoder training results')
-    parser.add_argument('--valid_every', type=int, default=500, help='interval to validation')
+    parser.add_argument('--valid_every', type=int, default=300, help='interval to validation')
     parser.add_argument('--save_every', type=int, default=30, help='interval to evaluation to concrete results')
     parser.add_argument('--seed', type=int, default=1111, help='random seed')
         

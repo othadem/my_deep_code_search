@@ -71,12 +71,13 @@ class SeqEncoder(nn.Module):
                 param.data.uniform_(-0.1, 0.1)
 
     def forward(self, inputs, input_lens=None):
+        # print("SeqEncoder - forward - inputs ", inputs)
         batch_size, seq_len=inputs.size()
         inputs = torch.tensor(inputs, dtype=torch.long, device="cuda:0")
         # print("--model ", arg.model)
         # convert to cpu type for query embedding
         # inputs = inputs.data.cpu().numpy()
-        # print("SeqEncoder - forward - inputs ", inputs)
+
         inputs = self.embedding(inputs)  # input: [batch_sz x seq_len]  embedded: [batch_sz x seq_len x emb_sz]
         inputs = F.dropout(inputs, 0.25, self.training)
         if input_lens is not None:# sort and pack sequence
